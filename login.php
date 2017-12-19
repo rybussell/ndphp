@@ -1,6 +1,5 @@
 <?php
 
-
 require_once("../config.php");
 require_once("lib.php");
 
@@ -12,25 +11,35 @@ if(isset($_POST['submit'])){
 	$rs = mysqli_query($conn,$sql);
 	$numRows = mysqli_num_rows($rs);
         $row = mysqli_fetch_assoc($rs);
+	$blocked = $row['blocked'];
 	
-    if($row['blocked'] == 0){	
-        if($numRows  == 1){
-		
-            
-		if(password_verify($password,$row['password'])){
-			echo "Password verified<br />";
-		}
-		else{
-			echo "Wrong Password";
-		}
-            // else { echo "Account not yet activated.";
-	}
-	else { echo "No User Found.";}
-        }
-    else {
-        echo "Account not yet activated.";
-    
-        
+       
+      /*  if($blocked == 0 and password_verify($password,$row['password'])) {
+            echo "Account verified!";
+       } elseif ($blocked == 1 and password_verify($password,$row['password'])){
+            echo "Account not yet activated.";
+       } elseif ($numRows <> 1){
+            echo "Account not found";
+       }  elseif ($numRows == 1 and !password_verify($password,$row['password'])){
+            echo "Invalid Password";
+       }*/
+
+        if ($numRows <> 1){
+            echo "Account not found";
+       } elseif ($blocked == 1 and password_verify($password,$row['password'])){
+            echo "Account not yet activated.";
+       } elseif ($numRows == 1 and !password_verify($password,$row['password'])){
+            echo "Invalid Password";
+       } elseif($blocked == 0 and password_verify($password,$row['password'])) {
+            echo "Account verified!";
+       }
+
+
+
+
+
+
+
 }
  
 echo "<link href='style.css' rel='stylesheet' type='text/css'>";
