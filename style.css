@@ -1,0 +1,22 @@
+
+body {
+
+    background: #111;
+    color: red;
+
+}
+
+input {
+    
+    background: #222;
+    color: #c00;
+    text-align: center;
+}
+
+button {
+
+    background: black;
+    color: red;
+    border: 1px solid red;
+
+}
